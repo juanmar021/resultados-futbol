@@ -1,6 +1,9 @@
-# resultados_futbol
+# Resultados de futbol
 
-A new Flutter project.
+Muestra los resultados de fubtol en un dia especifico sumistrados por https://rapidapi.com/api-sports/api/api-football
+Asi como tambien el resultado de un partido en vivo
+
+![Ejemplo 1](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg)
 
 ## Getting Started
 
