@@ -14,22 +14,52 @@ class Partidos extends StatelessWidget {
 
   final List<LigaModel> ligas;
 
+
   Partidos({ @required this.ligas});
 
+ 
 
   @override
   Widget build(BuildContext context) {
+
+ 
     
     return  SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15),
-        child:Column(
-          children: _ligas(context)
-        )
+        child: _mostrarLigas(context)
+        // child: Text('partiods...'),
         ),
     );
   }
 
+Widget _mostrarLigas(BuildContext context){
+
+
+// return Text('kkkk ${ligas[0].partidos.length}');
+
+return Column(
+  children: _ligas(context),
+);
+
+  // return ListView.builder(
+
+  //   itemBuilder: ( BuildContext context,int i){
+
+  //       return Column(
+  //         children: <Widget>[
+  //           Text('partido')
+  //           //  _liga(context,ligas[i]),
+  //           //  SizedBox(height: 20)
+  //         ],
+  //       );
+
+  //   },
+
+  //   itemCount: ligas.length,
+
+  // );
+}
 
  List<Widget> _ligas(BuildContext context){
 
@@ -59,11 +89,11 @@ class Partidos extends StatelessWidget {
           children: <Widget>[
           Row(
             children: <Widget>[
-               FadeInImage(
-                      image: NetworkImage(liga.getEscudo()),
-                      placeholder:AssetImage('assets/loader.gif') ,
-                      height: 30,
-              ),
+              //  FadeInImage(
+              //         image: NetworkImage(liga.getEscudo()),
+              //         placeholder:AssetImage('assets/loader.gif') ,
+              //         height: 30,
+              // ),
               SizedBox(width: 10),
               Text('${ liga.country }:',style: Theme.of(context).textTheme.subtitle),
               SizedBox(width: 10),
@@ -120,7 +150,7 @@ class Partidos extends StatelessWidget {
   Widget _partido(PartidoModel partido,Size size)
   {
     
-     Widget marker;
+     Widget marker=Text('-');
      if(partido.goalsAwayTeam==null)
      {
        marker=_horaPartido(partido.eventDate.substring(11,16));
@@ -149,7 +179,7 @@ class Partidos extends StatelessWidget {
                 Flexible(
             
                   child: Container(
-                    width: size.width*0.30,
+                    width: size.width*0.40,
                     child: Text(
                       partido.homeTeam.teamName,
                       textAlign: TextAlign.left,
@@ -161,23 +191,23 @@ class Partidos extends StatelessWidget {
 
                 Row(
                   children: <Widget>[
-                    FadeInImage(
-                      image: NetworkImage(partido.homeTeam.getEscudo()),
-                      placeholder:AssetImage('assets/loader.gif') ,
-                      height: 30,
-                    ),
+                    // FadeInImage(
+                    //   image: NetworkImage(partido.homeTeam.getEscudo()),
+                    //   placeholder:AssetImage('assets/loader.gif') ,
+                    //   height: 30,
+                    // ),
                     marker,
-                    FadeInImage(
-                      image: NetworkImage(partido.awayTeam.getEscudo()),
-                      placeholder:AssetImage('assets/loader.gif') ,
-                      height: 30,
-                    ),
+                    // FadeInImage(
+                    //   image: NetworkImage(partido.awayTeam.getEscudo()),
+                    //   placeholder:AssetImage('assets/loader.gif') ,
+                    //   height: 30,
+                    // ),
                   ]
                   ),
                 
                  Flexible(
                   child: Container(
-                  width: size.width*0.30,
+                  width: size.width*0.40,
 
                      child: Text(                
                       partido.awayTeam.teamName,

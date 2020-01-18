@@ -1,66 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:resultados_futbol/src/models/partido_model.dart';
-import 'package:resultados_futbol/src/providers/partidos_provider.dart';
-import 'package:resultados_futbol/src/utils/Funciones.dart';
-import 'package:resultados_futbol/src/widgets/partidos_widget.dart' as widget;
+import 'package:resultados_futbol/src/bloc/provider.dart';
+import 'package:resultados_futbol/src/models/liga_model.dart';
+import 'package:resultados_futbol/src/widgets/app_bar.dart';
+import 'package:resultados_futbol/src/widgets/nav_bar_bottom.dart';
+import 'package:resultados_futbol/src/widgets/partidos_widget.dart';
 
 
 
-class PartidosPage extends StatefulWidget {
- 
-  @override
-  _PartidosPageState createState() => _PartidosPageState();
-}
-
-class _PartidosPageState extends State<PartidosPage> {
-  final PartidosProvider partidosProvider = new PartidosProvider();
-  String fechaPartidos;
+class PartidosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    fechaPartidos= DateFormat("yyyy-MM-dd").format( DateTime.now());
-    return Scaffold(
-      appBar:_appBar(context),
-      body: _cargarPartidos(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
+
+   final partidosBloc = Provider.mainBloc(context);
+
+    return Container(
+      child: Scaffold(
+        appBar:MyAppBar(
+          title: 'PARTIDOS',
+          appBar: AppBar(),
+        ),
+        body:_mostrarPartidos(partidosBloc),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
 
         onPressed: (){},
         child: Icon(Icons.live_tv),
 
+       ),
+
+        
+        bottomNavigationBar: NavBarBottom()
+
       ),
-      bottomNavigationBar: BottomNavigationBar(
-
-        items:<BottomNavigationBarItem>[
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.format_align_left),
-            title: Text('Todos')
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            title: Text('Mis equipos')
-          ),
-        ] ,
-      ),
-
-      
     );
-   
   }
 
-  Widget _cargarPartidos(){
-    
-    // OPTENEMOS LA FECHA ACTUAL
- 
-      return FutureBuilder(
-      future: partidosProvider.getPartidos(fechaPartidos),
-      builder: (BuildContext context, AsyncSnapshot<List<PartidoModel>> snapshot) {
-        
+  Widget _mostrarPartidos(MainBloc partidosBloc)
+  {
+
+    return StreamBuilder(
+
+      stream: partidosBloc.partidosStream,
+      builder: (BuildContext context, AsyncSnapshot<List<LigaModel>> snapshot){
+
         if ( snapshot.hasData ) {
          
-          return widget.Partidos( ligas:  Funciones.fixtureOrderByLeague(snapshot.data));
+        
+          return Partidos( 
+            ligas:  snapshot.data
+            );
+          // return Text('HAY DATA');
         } else {
           return Container(
             height: 400.0,
@@ -69,58 +59,11 @@ class _PartidosPageState extends State<PartidosPage> {
             )
           );
         }
-        
+
+
       },
+
     );
 
   }
-
-  Widget _appBar(BuildContext context)
-  {
- return AppBar(
-        title: Center(
-        child: Column(
-          children: <Widget>[
-            Text('PARTIDOS'),
-            Text('$fechaPartidos',style: TextStyle(fontSize: 14))
-          ],
-        )),
-        actions: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: IconButton(
-              icon: Icon(Icons.calendar_today),
-              onPressed: ()=>_selectDate(context),
-            ),
-            
-            // child: Icon(Icons.calendar_today)
-            )
-        ],
-      );
-  }
-
-    _selectDate(BuildContext context) async {
-
-    DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: new DateTime.now(),
-      firstDate: new DateTime(2019),
-      lastDate: new DateTime(2021),
-      locale: Locale('es', 'ES')
-    );
-
-    if ( picked != null ) {
-
-      print(picked.toString());
-      setState(() {
-      fechaPartidos= DateFormat("yyyy-MM-dd").format(picked);
-      });
-      // setState(() {
-      //     _fecha = picked.toString();
-      //     _inputFieldDateController.text = _fecha;
-      // }); 
-    }
-
-  }
-
 }
