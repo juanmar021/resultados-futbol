@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:resultados_futbol/src/bloc/ligas_bloc.dart';
 import 'package:resultados_futbol/src/bloc/provider.dart';
 
 
@@ -18,7 +19,7 @@ class MyAppBar extends StatelessWidget  implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
-        final bloc = Provider.mainBloc(context);
+        final bloc = Provider.ligasBloc(context);
 
     return  AppBar(
         title: Center(
@@ -45,10 +46,10 @@ class MyAppBar extends StatelessWidget  implements PreferredSizeWidget{
     
   }
 
-    _getFecha(MainBloc bloc)
+    _getFecha(LigasBloc bloc)
     {
       return StreamBuilder(
-        stream: bloc.fechaPartidosStream,
+        stream: bloc.fechaConsultasStream,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot){
           if(snapshot.hasData){
 
@@ -62,7 +63,7 @@ class MyAppBar extends StatelessWidget  implements PreferredSizeWidget{
         },
       );
     }
-    _selectDate(BuildContext context,MainBloc bloc) async {
+    _selectDate(BuildContext context,LigasBloc bloc) async {
 
     DateTime picked = await showDatePicker(
       context: context,
@@ -74,16 +75,10 @@ class MyAppBar extends StatelessWidget  implements PreferredSizeWidget{
 
     if ( picked != null ) {
 
-      print(picked.toString());
+    
       bloc.setFechaPartidos(DateFormat("yyyy-MM-dd").format(picked));
       bloc.cargarLigas();
-      // setState(() {
-      // _fechaPartidos= DateFormat("yyyy-MM-dd").format(picked);
-      // });
-      // setState(() {
-      //     _fecha = picked.toString();
-      //     _inputFieldDateController.text = _fecha;
-      // }); 
+    
     }
 
   }

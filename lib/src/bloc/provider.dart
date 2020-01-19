@@ -1,14 +1,13 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:resultados_futbol/src/bloc/ligas_bloc.dart';
 
-import 'package:resultados_futbol/src/bloc/main_bloc.dart';
-export 'package:resultados_futbol/src/bloc/main_bloc.dart';
 
 
 class Provider extends InheritedWidget {
 
-  final _mainBloc      = new MainBloc();
+  final _ligasBloc      = new LigasBloc();
 
 
   static Provider _instancia;
@@ -36,8 +35,8 @@ class Provider extends InheritedWidget {
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
-  static MainBloc mainBloc ( BuildContext context ) {
-    return ( context.dependOnInheritedWidgetOfExactType<Provider>())._mainBloc;
+  static LigasBloc ligasBloc ( BuildContext context ) {
+    return ( context.dependOnInheritedWidgetOfExactType<Provider>())._ligasBloc;
   }
 
 

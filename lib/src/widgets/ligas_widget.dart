@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:resultados_futbol/src/bloc/ligas_bloc.dart';
 // import 'package:flutter_svg/svg.dart';
-import 'package:resultados_futbol/src/bloc/main_bloc.dart';
 import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/models/liga_model.dart';
 
@@ -14,7 +14,7 @@ class Ligas extends StatelessWidget {
    
   @override
   Widget build(BuildContext context) {
-       final ligasBloc = Provider.mainBloc(context);
+       final ligasBloc = Provider.ligasBloc(context);
 
     return Container(
       child: _cargarLigas(context,ligasBloc),
@@ -22,7 +22,7 @@ class Ligas extends StatelessWidget {
   }
 
 
-  Widget _cargarLigas(BuildContext _context,MainBloc ligasBloc)
+  Widget _cargarLigas(BuildContext _context,LigasBloc ligasBloc)
   {
     return ListView.builder(
       itemBuilder: (BuildContext context, int i) {
@@ -42,7 +42,7 @@ class Ligas extends StatelessWidget {
      );
   }
   
-  Widget _liga(LigaModel liga,BuildContext context, MainBloc ligasBloc){
+  Widget _liga(LigaModel liga,BuildContext context, LigasBloc ligasBloc){
 
         return Container(
          child: Column(
@@ -69,7 +69,7 @@ class Ligas extends StatelessWidget {
                        List<LigaModel> l= new List();
                        l.add(liga);    
                       //  print(liga.partidos.length.toString());    
-                       ligasBloc.setPartidos(l)  ;    
+                      //  ligasBloc.setPartidos(l)  ;    
                        Navigator.pushNamed(context, 'partidos');   
                      
                       },
@@ -99,7 +99,7 @@ class Ligas extends StatelessWidget {
     );
   }
 
-  Widget _todosLosPartidos(BuildContext context,MainBloc ligasBloc)
+  Widget _todosLosPartidos(BuildContext context,LigasBloc ligasBloc)
 {
     return ListTile(
       title: Text('Todos los partidos',style:Theme.of(context).textTheme.title),
@@ -115,7 +115,7 @@ class Ligas extends StatelessWidget {
                 )
                 ),     
       onTap: (){
-          ligasBloc.setPartidos(ligas)  ;    
+          // ligasBloc.setPartidos(ligas)  ;    
           Navigator.pushNamed(context, 'partidos');  
       },
     );
