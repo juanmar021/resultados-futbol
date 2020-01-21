@@ -20,7 +20,7 @@ class PartidosOnlinePage extends StatelessWidget {
 
     return Container(
       child: Scaffold(
-        appBar:AppBar(title: Center(child: Text('EN VIVO'),),),
+        appBar:AppBar(title: Container(margin: EdgeInsets.only(right: 50), child: Center(child: Text('EN VIVO'),)),),
         body:_mostrarPartidos(bloc),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ButtonNavBar(pageSeleted: 2,),        

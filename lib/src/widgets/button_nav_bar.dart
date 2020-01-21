@@ -16,6 +16,18 @@ class ButtonNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
 
     PartidosBloc bloc= Provider.partidosBloc(context);
+
+    Widget buttonDefault=FloatingActionButton(
+
+        onPressed: (){
+          if(pageSeleted!=2)
+          Navigator.pushNamed(context, 'partidos/online');
+        },
+        child: Icon(
+          Icons.wifi_tethering,
+          color: pageSeleted==2?Colors.greenAccent:Colors.white,),
+
+        );
     
     return StreamBuilder(
       stream: bloc.partidosEnvivoStream,
@@ -23,53 +35,32 @@ class ButtonNavBar extends StatelessWidget {
 
         if(snapShot.hasData){
 
-        if(snapShot.data.data.length>0){
+        if(snapShot.data.data!=null){
           
-        return  FloatingActionButton(
+            return  FloatingActionButton(
 
-        onPressed: (){
-          if(pageSeleted!=2)
-          Navigator.pushNamed(context, 'partidos/online');
-        },
-        child: Badge(
-          // badgeContent: Text('',style: TextStyle(color: Colors.white),),
-          position: BadgePosition(bottom: 17.0,right: -1.0),
-          child: Icon(
-            Icons.wifi_tethering,
-            color: pageSeleted==2?Colors.greenAccent:Colors.white,),
-        ),
+            onPressed: (){
+              if(pageSeleted!=2)
+              Navigator.pushNamed(context, 'partidos/online');
+            },
+            child: Badge(
+              // badgeContent: Text('',style: TextStyle(color: Colors.white),),
+              position: BadgePosition(bottom: 17.0,right: -1.0),
+              child: Icon(
+                Icons.wifi_tethering,
+                color: pageSeleted==2?Colors.greenAccent:Colors.white,),
+            ),
 
-      );
+          );
 
         }else{
 
-        return  FloatingActionButton(
-
-        onPressed: (){
-          if(pageSeleted!=2)
-          Navigator.pushNamed(context, 'partidos/online');
-        },
-        child: Icon(
-          Icons.wifi_tethering,
-          color: pageSeleted==2?Colors.greenAccent:Colors.white,),
-
-        );
+        return  buttonDefault;
         }
-
-
-
         }else{
-        return  FloatingActionButton(
 
-        onPressed: (){
-          if(pageSeleted!=2)
-          Navigator.pushNamed(context, 'partidos/online');
-        },
-        child: Icon(
-          Icons.wifi_tethering,
-          color: pageSeleted==2?Colors.greenAccent:Colors.white,),
+        return  buttonDefault;
 
-        );
         }
 
       }

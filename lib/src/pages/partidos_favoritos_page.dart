@@ -22,7 +22,7 @@ class EquiposFavoritosPage extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar:AppBar(
-        title: Center(child: Text('FAVORITOS'),),
+        title: Container(margin:EdgeInsets.only(right: 50),child: Center(child: Text('FAVORITOS'),)),
       ),
       // body: Loading(mensaje: 'Cargando ligas...',),
       body:_cargarFavoritos(bloc),

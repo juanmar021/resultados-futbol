@@ -11,7 +11,7 @@ class ApiBaseHelper {
   
      final String _baseUrl="https://api-football-v1.p.rapidapi.com";
      final String _host="api-football-v1.p.rapidapi.com";
-     final String _apiKey= "11e8e7c25cmshecd29a7e0153944p181f48jsn28a5aa6f5635";
+     final String _apiKey= "YOUR_API_KEY_OF_https://rapidapi.com/api-sports";
 
      Map <String,String> headers;
 
