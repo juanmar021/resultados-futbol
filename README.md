@@ -2,8 +2,16 @@
 
 Muestra los resultados de fubtol sumistrados por https://rapidapi.com/api-sports/api/api-football
 Asi como tambien el resultado de un partido en vivo.
-Uso facil del StreamBuilder, Peticiones http, Patron Bloc, SharedPreferences
 
+Uso facil de:
+
+-StreamBuilder
+-Peticiones http
+-Patron Bloc
+-SharedPreferences
+
+# ScreemShots
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg" width="200" height="200" />
 ![](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg | width=100)
 
 
