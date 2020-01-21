@@ -4,7 +4,7 @@ Muestra los resultados de fubtol en un dia especifico sumistrados por https://ra
 Asi como tambien el resultado de un partido en vivo.
 Uso facil del FutureBuilder, Peticiones http, CalendarPicker
 
-![Ejemplo 1](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg)
+![Ejemplo 1](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg | width=100)
 
 ## Getting Started
 
