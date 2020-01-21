@@ -1,10 +1,12 @@
 # Resultados de futbol
 
-Muestra los resultados de fubtol en un dia especifico sumistrados por https://rapidapi.com/api-sports/api/api-football
+Muestra los resultados de fubtol sumistrados por https://rapidapi.com/api-sports/api/api-football
 Asi como tambien el resultado de un partido en vivo.
-Uso facil del FutureBuilder, Peticiones http, CalendarPicker
+Uso facil del StreamBuilder, Peticiones http, Patron Bloc, SharedPreferences
 
-![Ejemplo 1](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg | width=100)
+![](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg | width=100)
+
+
 
 ## Getting Started
 
