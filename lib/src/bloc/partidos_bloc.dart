@@ -23,9 +23,12 @@ class PartidosBloc{
     final  _partidosController    = BehaviorSubject<List<LigaModel>>(); 
     final  _partidoController    = BehaviorSubject<ApiResponse<PartidoModel>>(); 
     final  _equiposFavoritosController    = BehaviorSubject<List<EquipoModel>>(); 
-    final  _pageSelectedController    = BehaviorSubject<int>(); 
+    final  _partidosEnvivoController    = BehaviorSubject<ApiResponse<List<LigaModel>>>(); 
 
 
+
+    Stream<ApiResponse<List<LigaModel>>>     get partidosEnvivoStream => _partidosEnvivoController.stream;
+    StreamSink<ApiResponse<List<LigaModel>>> get partidosEnvivoSink=> _partidosEnvivoController.sink;
 
     Stream<List<LigaModel>>     get partidosStream => _partidosController.stream;
     StreamSink<List<LigaModel>> get partidosSink=> _partidosController.sink;
@@ -36,20 +39,14 @@ class PartidosBloc{
     Stream<List<EquipoModel>>     get equiposFavoritosStream => _equiposFavoritosController.stream;
     StreamSink<List<EquipoModel>> get equiposFavoritosSink=> _equiposFavoritosController.sink;
 
-    Stream<int>     get pageSelectedStream => _pageSelectedController.stream;
-    StreamSink<int> get pageSelectedSink=> _pageSelectedController.sink;
-
 
 
  PartidosBloc(){
    cargarEquiposFavoritos();
-    pageSelectedSink.add(0);
+   cargarPartidosEnvivo();
  }
 
- void setPageSeleted(int index){
-     pageSelectedSink.add(index);
 
- }
  
 
   void cargarPartido(int idPartido) async {
@@ -62,6 +59,20 @@ class PartidosBloc{
     } catch (e) {
       partidoSink.add(ApiResponse.error(e.toString()));
       print(e);
+    }
+
+  }
+
+    void cargarPartidosEnvivo() async {
+
+     partidosEnvivoSink.add(ApiResponse.loading('Cargando partidos...'));
+
+    try {
+      List<LigaModel> partidos = await _partidosProvider.getPartidosOnline();
+      partidosEnvivoSink.add(ApiResponse.completed(partidos));
+    } catch (e) {
+      partidosEnvivoSink.add(ApiResponse.error(e.toString()));
+      print('Error en cargar partidos: '+e.toString());
     }
 
   }
@@ -89,7 +100,7 @@ void cargarEquiposFavoritos()
     _partidosController?.close();
     _partidoController?.close();
     _equiposFavoritosController?.close();
-    _pageSelectedController?.close();
+    _partidosEnvivoController?.close();
   }
 
 

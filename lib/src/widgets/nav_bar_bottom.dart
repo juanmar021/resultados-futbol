@@ -11,61 +11,52 @@ import 'package:resultados_futbol/src/models/equipo_model.dart';
 
 class NavBarBottom extends StatelessWidget {
 
+  final int pageSeleted;
+
+  NavBarBottom({@required this.pageSeleted});
+
   @override
   Widget build(BuildContext context) {
 
     PartidosBloc bloc = Provider.partidosBloc(context);
-
+ 
     // prefs.equiposFavoritos=[EquipoModel(logo: 'logodel.png',teamId: 123,teamName: 'barcelona fc')];
 
     // print(prefs.equiposFavoritos.toString());
-    return _crearNavBar(bloc);
+    return _crearNavBar(context,bloc);
   }
 
-  Widget _crearNavBar(PartidosBloc bloc){
+  Widget _crearNavBar(BuildContext context,PartidosBloc bloc){
 
-    return StreamBuilder(
-      stream:  bloc.pageSelectedStream,
-      builder: (BuildContext context,AsyncSnapshot<int> snapShot){
-
-        if(snapShot.hasData){
-          return Container(
-          child: BottomNavigationBar(
+ return Container(
+           child: BottomNavigationBar(
 
             items:<BottomNavigationBarItem>[
 
               BottomNavigationBarItem(
                 icon: GestureDetector(
-                  onTap: ()=>_navigate(context,0,snapShot.data),
+                  onTap: ()=>_navigate(context,0),
                   child: Icon(
                     Icons.format_align_left,
-                    color:snapShot.data==0? Theme.of(context).primaryColor:Colors.grey[600]),
+                    color:pageSeleted==0? Theme.of(context).primaryColor:Colors.grey[600]),
                   ),
                 title: Text(
                   'Todos',
-                  style: TextStyle(color: snapShot.data==0? Theme.of(context).primaryColor:Colors.grey[600]),)
+                  style: TextStyle(color: pageSeleted==0? Theme.of(context).primaryColor:Colors.grey[600]),)
               ),
               BottomNavigationBarItem(
-                icon: _getIconFavorite(bloc,snapShot.data==1? Theme.of(context).primaryColor:Colors.grey[600],snapShot.data),
+                icon: _getIconFavorite(bloc,pageSeleted==1? Theme.of(context).primaryColor:Colors.grey[600]),
                 title: Text(
                   'Mis equipos',
-                   style:TextStyle(color:snapShot.data==1? Theme.of(context).primaryColor:Colors.grey[600])
+                   style:TextStyle(color:pageSeleted==1? Theme.of(context).primaryColor:Colors.grey[600])
                   )
               ),
             ] ,
           ),
         );
-        }
-        else{
-          return Container();
-        }
-
-      }
-
-    );
   }
 
-  Widget _getIconFavorite(PartidosBloc bloc,Color color ,int pageIndexCurrent)
+  Widget _getIconFavorite(PartidosBloc bloc,Color color )
   {
       return StreamBuilder(
         stream: bloc.equiposFavoritosStream,
@@ -76,7 +67,7 @@ class NavBarBottom extends StatelessWidget {
             return Badge(
                       badgeContent: Text(snapShot.data.length.toString(),style: TextStyle(color: Colors.white),),
                       child: GestureDetector(
-                        onTap: ()=>_navigate(context,1,pageIndexCurrent),
+                        onTap: ()=>_navigate(context,1),
                         child: Icon(Icons.favorite,color: color,)
                         ),
                     );
@@ -86,7 +77,7 @@ class NavBarBottom extends StatelessWidget {
           {
 
             return GestureDetector(
-              onTap: ()=>_navigate(context,1,pageIndexCurrent),
+              onTap: ()=>_navigate(context,1),
               child: Icon(Icons.favorite,color: color)
               );
           }
@@ -94,9 +85,9 @@ class NavBarBottom extends StatelessWidget {
       );
   }
 
-  void _navigate(BuildContext context, int pageIndex, int pageIndexCurrent)
+  void _navigate(BuildContext context, int pageIndex)
   {
-    if(pageIndexCurrent!=pageIndex){
+    if(pageSeleted!=pageIndex){
         switch (pageIndex){
               case 0:
               

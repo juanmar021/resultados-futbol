@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resultados_futbol/src/bloc/partidos_bloc.dart';
 import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/models/equipo_model.dart';
+import 'package:resultados_futbol/src/widgets/button_nav_bar.dart';
 import 'package:resultados_futbol/src/widgets/load_image.dart';
 import 'package:resultados_futbol/src/widgets/nav_bar_bottom.dart';
 
@@ -16,7 +17,6 @@ class EquiposFavoritosPage extends StatelessWidget {
 
    final bloc = Provider.partidosBloc(context);
 
-   bloc.setPageSeleted(1);
  
  
     return Scaffold(
@@ -27,13 +27,8 @@ class EquiposFavoritosPage extends StatelessWidget {
       // body: Loading(mensaje: 'Cargando ligas...',),
       body:_cargarFavoritos(bloc),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-
-        onPressed: (){},
-        child: Icon(Icons.wifi_tethering),
-
-      ),
-      bottomNavigationBar: NavBarBottom()
+      floatingActionButton:ButtonNavBar(pageSeleted: 1,),
+      bottomNavigationBar: NavBarBottom(pageSeleted: 1)
 
       
     );

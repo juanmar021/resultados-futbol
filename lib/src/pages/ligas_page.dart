@@ -6,6 +6,7 @@ import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/models/liga_model.dart';
 import 'package:resultados_futbol/src/services/api_response.dart';
 import 'package:resultados_futbol/src/widgets/app_bar.dart';
+import 'package:resultados_futbol/src/widgets/button_nav_bar.dart';
 import 'package:resultados_futbol/src/widgets/ligas_widget.dart';
 import 'package:resultados_futbol/src/widgets/loading_widget.dart';
 import 'package:resultados_futbol/src/widgets/error_widget.dart';
@@ -24,7 +25,6 @@ class LigasPage extends StatelessWidget {
     final ligasBloc = Provider.ligasBloc(context);
     final partidosBloc = Provider.partidosBloc(context);
 
-   partidosBloc.setPageSeleted(0);
  
  
     return Scaffold(
@@ -35,13 +35,8 @@ class LigasPage extends StatelessWidget {
       // body: Loading(mensaje: 'Cargando ligas...',),
       body: _cargarLigas(ligasBloc),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-
-        onPressed: (){},
-        child: Icon(Icons.wifi_tethering),
-
-      ),
-      bottomNavigationBar: NavBarBottom()
+      floatingActionButton:ButtonNavBar(pageSeleted: 0,),
+      bottomNavigationBar: NavBarBottom(pageSeleted: 0)
 
       
     );

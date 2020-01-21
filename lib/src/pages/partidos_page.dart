@@ -4,6 +4,7 @@ import 'package:resultados_futbol/src/bloc/partidos_bloc.dart';
 import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/models/liga_model.dart';
 import 'package:resultados_futbol/src/widgets/app_bar.dart';
+import 'package:resultados_futbol/src/widgets/button_nav_bar.dart';
 import 'package:resultados_futbol/src/widgets/nav_bar_bottom.dart';
 import 'package:resultados_futbol/src/widgets/partidos_widget.dart';
 
@@ -16,7 +17,7 @@ class PartidosPage extends StatelessWidget {
   Widget build(BuildContext context) {
    final bloc = Provider.partidosBloc(context);
 
-   bloc.setPageSeleted(0);
+
 
     return Container(
       child: Scaffold(
@@ -26,15 +27,8 @@ class PartidosPage extends StatelessWidget {
         ),
         body:_mostrarPartidos(bloc),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-
-        onPressed: (){},
-        child: Icon(Icons.wifi_tethering),
-
-       ),
-
-        
-        bottomNavigationBar: NavBarBottom()
+        floatingActionButton: ButtonNavBar(pageSeleted: 3,),        
+        bottomNavigationBar: NavBarBottom(pageSeleted: 3,)
 
       ),
     );

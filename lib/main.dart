@@ -4,6 +4,7 @@ import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/pages/ligas_page.dart';
 import 'package:resultados_futbol/src/pages/partido_detalle_page.dart';
 import 'package:resultados_futbol/src/pages/partidos_favoritos_page.dart';
+import 'package:resultados_futbol/src/pages/partidos_online_page.dart';
 
 
 import 'package:resultados_futbol/src/pages/partidos_page.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
             'ligas'               : ( BuildContext context ) => LigasPage(),      
             'partidos'            : ( BuildContext context ) => PartidosPage(),
             'partidos/detalles'   : ( BuildContext context ) => PartidoDetallePage(),       
+            'partidos/online'     : ( BuildContext context ) => PartidosOnlinePage(),       
             'equipos/favoritos'   : ( BuildContext context ) => EquiposFavoritosPage()        
 
         },
