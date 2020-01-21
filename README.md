@@ -10,9 +10,8 @@ Uso facil de:
 -Patron Bloc
 -SharedPreferences
 
-# ScreemShots
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg" width="200" height="200" />
-![](https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg | width=100)
+# ScreenShots
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg" width="400" height="600" />
 
 
 
