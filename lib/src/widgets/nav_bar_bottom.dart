@@ -19,25 +19,53 @@ class NavBarBottom extends StatelessWidget {
     // prefs.equiposFavoritos=[EquipoModel(logo: 'logodel.png',teamId: 123,teamName: 'barcelona fc')];
 
     // print(prefs.equiposFavoritos.toString());
-    return Container(
-      child: BottomNavigationBar(
+    return _crearNavBar(bloc);
+  }
 
-        items:<BottomNavigationBarItem>[
+  Widget _crearNavBar(PartidosBloc bloc){
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.format_align_left),
-            title: Text('Todos')
+    return StreamBuilder(
+      stream:  bloc.pageSelectedStream,
+      builder: (BuildContext context,AsyncSnapshot<int> snapShot){
+
+        if(snapShot.hasData){
+          return Container(
+          child: BottomNavigationBar(
+
+            items:<BottomNavigationBarItem>[
+
+              BottomNavigationBarItem(
+                icon: GestureDetector(
+                  onTap: ()=>_navigate(context,0,snapShot.data),
+                  child: Icon(
+                    Icons.format_align_left,
+                    color:snapShot.data==0? Theme.of(context).primaryColor:Colors.grey[600]),
+                  ),
+                title: Text(
+                  'Todos',
+                  style: TextStyle(color: snapShot.data==0? Theme.of(context).primaryColor:Colors.grey[600]),)
+              ),
+              BottomNavigationBarItem(
+                icon: _getIconFavorite(bloc,snapShot.data==1? Theme.of(context).primaryColor:Colors.grey[600],snapShot.data),
+                title: Text(
+                  'Mis equipos',
+                   style:TextStyle(color:snapShot.data==1? Theme.of(context).primaryColor:Colors.grey[600])
+                  )
+              ),
+            ] ,
           ),
-          BottomNavigationBarItem(
-            icon: _getIconFavorite(bloc),
-            title: Text('Mis equipos')
-          ),
-        ] ,
-      ),
+        );
+        }
+        else{
+          return Container();
+        }
+
+      }
+
     );
   }
 
-  Widget _getIconFavorite(PartidosBloc bloc)
+  Widget _getIconFavorite(PartidosBloc bloc,Color color ,int pageIndexCurrent)
   {
       return StreamBuilder(
         stream: bloc.equiposFavoritosStream,
@@ -47,15 +75,41 @@ class NavBarBottom extends StatelessWidget {
 
             return Badge(
                       badgeContent: Text(snapShot.data.length.toString(),style: TextStyle(color: Colors.white),),
-                      child: Icon(Icons.favorite),
+                      child: GestureDetector(
+                        onTap: ()=>_navigate(context,1,pageIndexCurrent),
+                        child: Icon(Icons.favorite,color: color,)
+                        ),
                     );
 
 
           }else
           {
-            return Icon(Icons.favorite);
+
+            return GestureDetector(
+              onTap: ()=>_navigate(context,1,pageIndexCurrent),
+              child: Icon(Icons.favorite,color: color)
+              );
           }
         }
       );
+  }
+
+  void _navigate(BuildContext context, int pageIndex, int pageIndexCurrent)
+  {
+    if(pageIndexCurrent!=pageIndex){
+        switch (pageIndex){
+              case 0:
+              
+                Navigator.pushNamed(context, 'ligas');
+                // bloc.setPageSeleted(pageIndex);
+              break;
+
+              default:
+                Navigator.pushNamed(context, 'equipos/favoritos');
+                // bloc.setPageSeleted(pageIndex);
+              break;
+        }
+    }
+   
   }
 }

@@ -23,6 +23,7 @@ class PartidosBloc{
     final  _partidosController    = BehaviorSubject<List<LigaModel>>(); 
     final  _partidoController    = BehaviorSubject<ApiResponse<PartidoModel>>(); 
     final  _equiposFavoritosController    = BehaviorSubject<List<EquipoModel>>(); 
+    final  _pageSelectedController    = BehaviorSubject<int>(); 
 
 
 
@@ -35,10 +36,19 @@ class PartidosBloc{
     Stream<List<EquipoModel>>     get equiposFavoritosStream => _equiposFavoritosController.stream;
     StreamSink<List<EquipoModel>> get equiposFavoritosSink=> _equiposFavoritosController.sink;
 
+    Stream<int>     get pageSelectedStream => _pageSelectedController.stream;
+    StreamSink<int> get pageSelectedSink=> _pageSelectedController.sink;
+
 
 
  PartidosBloc(){
    cargarEquiposFavoritos();
+    pageSelectedSink.add(0);
+ }
+
+ void setPageSeleted(int index){
+     pageSelectedSink.add(index);
+
  }
  
 
@@ -79,6 +89,7 @@ void cargarEquiposFavoritos()
     _partidosController?.close();
     _partidoController?.close();
     _equiposFavoritosController?.close();
+    _pageSelectedController?.close();
   }
 
 

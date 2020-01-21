@@ -7,6 +7,7 @@ class Partidos {
 
   Partidos.fromJsonList( List<dynamic> jsonList  ) {
 
+      print('from json list');
     if ( jsonList == null ) return;
 
     for ( var item in jsonList  ) {
@@ -264,11 +265,13 @@ class Lineups {
         this.visitante,
     });
 
-    factory Lineups.fromJson(Map<String, dynamic> json,String local,String visitante) => Lineups(
-        local: Team.fromJson(json[local]),
-        visitante: Team.fromJson(json[visitante]),
-    );
-
+    Lineups.fromJson(Map<String, dynamic> json,String _local,String _visitante) {
+        if(json!=null){
+        local= Team.fromJson(json[_local]);
+        visitante= Team.fromJson(json[_visitante]);
+        }
+       
+      }
     // Map<String, dynamic> toJson() => {
     //     "Bordeaux": bordeaux.toJson(),
     //     "Saint Etienne": saintEtienne.toJson(),

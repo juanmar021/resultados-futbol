@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:resultados_futbol/src/models/partido_model.dart';
+import 'package:resultados_futbol/src/widgets/partidos_widget/alineacion_partidos.dart';
 import 'package:resultados_futbol/src/widgets/partidos_widget/eventos_partidos.dart';
 
 
@@ -42,13 +43,13 @@ class _DetallePartidoState extends State<DetallePartido>  with SingleTickerProvi
            children: <Widget>[
              _tabsHost(),
               Expanded(
-               child: SingleChildScrollView(
+                
 
 
-                 child:  _crearTabContent()                
+                 child:  _mostrarInfo()                
                     
                  
-               ),
+               
              )
             //  _crearTabContent()
               
@@ -95,12 +96,33 @@ List<Widget> _tabs(){
     switch(_tabSelected){
 
       case 0:
-      return Text('TAB O CONTENT');
+      return AlineacionPartidos(alineaciones: widget.partido.lineups,);
       case 1: 
       return EventosPartido(eventos: widget.partido.eventos,idEquipoLocal: widget.partido.homeTeam.teamId,);
       default: 
-      return Text('TAB 2 CONTENT');
+      return Text('TAB CONTENT');
 
     }
+  }
+
+  Widget _mostrarInfo(){
+
+    if(widget.partido.lineups.local!=null){
+
+        return _crearTabContent();
+
+
+     }else{
+
+       return Center(
+         child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
+           children: <Widget>[
+                Icon(Icons.calendar_today,size: 50,color: Colors.grey[400],),
+                Text('No hay alineación',style: Theme.of(context).textTheme.title)
+           ],
+         ),
+       );
+     }
   }
 }

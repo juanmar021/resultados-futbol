@@ -22,7 +22,7 @@ class LigasProvider{
 
     final api=response['api'];
  
-    final List<PartidoModel> partidos = Partidos.fromJsonList(api['fixtures']).items;
+     final List<PartidoModel> partidos = Partidos.fromJsonList(api['fixtures']).items;
 
     return Funciones.fixtureOrderByLeague(partidos);
 

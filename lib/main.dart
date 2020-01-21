@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/pages/ligas_page.dart';
 import 'package:resultados_futbol/src/pages/partido_detalle_page.dart';
+import 'package:resultados_futbol/src/pages/partidos_favoritos_page.dart';
 
 
 import 'package:resultados_futbol/src/pages/partidos_page.dart';
@@ -39,8 +40,9 @@ class MyApp extends StatelessWidget {
         routes: {
             'ligas'               : ( BuildContext context ) => LigasPage(),      
             'partidos'            : ( BuildContext context ) => PartidosPage(),
-            'partidos/detalles'   : ( BuildContext context ) => PartidoDetallePage()        
-        
+            'partidos/detalles'   : ( BuildContext context ) => PartidoDetallePage(),       
+            'equipos/favoritos'   : ( BuildContext context ) => EquiposFavoritosPage()        
+
         },
        
 

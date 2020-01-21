@@ -22,6 +22,9 @@ class LigasPage extends StatelessWidget {
   Widget build(BuildContext context) {
   
     final ligasBloc = Provider.ligasBloc(context);
+    final partidosBloc = Provider.partidosBloc(context);
+
+   partidosBloc.setPageSeleted(0);
  
  
     return Scaffold(

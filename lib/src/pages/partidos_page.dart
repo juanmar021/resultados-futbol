@@ -16,6 +16,8 @@ class PartidosPage extends StatelessWidget {
   Widget build(BuildContext context) {
    final bloc = Provider.partidosBloc(context);
 
+   bloc.setPageSeleted(0);
+
     return Container(
       child: Scaffold(
         appBar:MyAppBar(
