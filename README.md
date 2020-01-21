@@ -11,12 +11,12 @@ Uso facil de:
 -SharedPreferences
 
 # ScreenShots
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg"  />
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img2.jpeg" width="400" height="800" />
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img3.jpeg" width="400" height="800" />
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img4.jpeg" width="400" height="800" />
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img5.jpeg" width="400" height="800" />
-<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img6.jpeg" width="400" height="800" />
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg"/>
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img2.jpeg"/>
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img3.jpeg"/>
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img4.jpeg"/>
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img5.jpeg"/>
+<img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img6.jpeg"/>
 
 
 
