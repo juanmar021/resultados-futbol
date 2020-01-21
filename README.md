@@ -5,10 +5,10 @@ Asi como tambien el resultado de un partido en vivo.
 
 Uso facil de:
 
--StreamBuilder
--Peticiones http
--Patron Bloc
--SharedPreferences
+### StreamBuilder
+### Peticiones http
+### Patron Bloc
+### SharedPreferences
 
 # ScreenShots
 <img src="https://github.com/juanmar021/resultados-futbol/blob/master/capturas/img1.jpeg"/>
