@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:resultados_futbol/src/bloc/ligas_bloc.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:resultados_futbol/src/bloc/partidos_bloc.dart';
 // import 'package:flutter_svg/svg.dart';
 import 'package:resultados_futbol/src/bloc/provider.dart';
 import 'package:resultados_futbol/src/models/liga_model.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
+ 
 
 
 class Ligas extends StatelessWidget {
@@ -14,40 +16,56 @@ class Ligas extends StatelessWidget {
    
   @override
   Widget build(BuildContext context) {
-       final ligasBloc = Provider.ligasBloc(context);
+       final partidosBloc = Provider.partidosBloc(context);
+
 
     return Container(
-      child: _cargarLigas(context,ligasBloc),
+      child: _cargarLigas(context,partidosBloc),
     );
   }
 
 
-  Widget _cargarLigas(BuildContext _context,LigasBloc ligasBloc)
+  Widget _cargarLigas(BuildContext _context,PartidosBloc partidosBloc)
   {
     return ListView.builder(
       itemBuilder: (BuildContext context, int i) {
             if(i==0){
               return Column(
                 children: <Widget>[
-                  _todosLosPartidos(context,ligasBloc),
+                  _todosLosPartidos(context,partidosBloc),
                   Divider(),
-                  _liga(ligas[i],_context,ligasBloc)
+                  _liga(ligas[i],_context,partidosBloc)
 
                 ],
               );
             }
-            else  return _liga(ligas[i],_context,ligasBloc);
+            else  return _liga(ligas[i],_context,partidosBloc);
       },
       itemCount: ligas.length
      );
   }
   
-  Widget _liga(LigaModel liga,BuildContext context, LigasBloc ligasBloc){
+  Widget _liga(LigaModel liga,BuildContext context, PartidosBloc partidosBloc){
 
         return Container(
          child: Column(
            children: <Widget>[
               ListTile(
+
+              
+                leading: Container(
+                  height: 25,
+                  width: 25,
+                  child: SvgPicture(                    
+                      AdvancedNetworkSvg(
+                        liga.getBandera(),
+                        SvgPicture.svgByteDecoder,
+                 
+                      ),
+                      // placeholderBuilder: (context) => CircularProgressIndicator(),
+                  
+                    ),
+                ),
               // leading: SvgPicture.network(
               // liga.getBandera(),
               // placeholderBuilder: (context) => CircularProgressIndicator(),
@@ -68,8 +86,7 @@ class Ligas extends StatelessWidget {
                 onTap: (){
                        List<LigaModel> l= new List();
                        l.add(liga);    
-                      //  print(liga.partidos.length.toString());    
-                      //  ligasBloc.setPartidos(l)  ;    
+                       partidosBloc.setPartidos(l)  ;    
                        Navigator.pushNamed(context, 'partidos');   
                      
                       },
@@ -99,7 +116,7 @@ class Ligas extends StatelessWidget {
     );
   }
 
-  Widget _todosLosPartidos(BuildContext context,LigasBloc ligasBloc)
+  Widget _todosLosPartidos(BuildContext context,PartidosBloc partidosBloc)
 {
     return ListTile(
       title: Text('Todos los partidos',style:Theme.of(context).textTheme.title),
@@ -115,7 +132,7 @@ class Ligas extends StatelessWidget {
                 )
                 ),     
       onTap: (){
-          // ligasBloc.setPartidos(ligas)  ;    
+           partidosBloc.setPartidos(ligas)  ;    
           Navigator.pushNamed(context, 'partidos');  
       },
     );

@@ -46,37 +46,16 @@ class LigasBloc{
       ligasSink.add(ApiResponse.completed(ligas));
     } catch (e) {
       ligasSink.add(ApiResponse.error(e.toString()));
-      print(e);
+      print('Error en cargar ligas: '+e.toString());
     }
 
   }
-  // void cargarPartidos() async {
 
-  //   _ligasController.sink.add(null);
-  //    final partidos = await _partidosProvider.getPartidos(_fechaPartidosController.value);
-
-  //   final ligas=Funciones.fixtureOrderByLeague(partidos);
-
-  //    _ligasController.sink.add( ligas);
-  //     _partidosController.sink.add( ligas);
-
-  // }
  void setFechaPartidos(String fecha){
     _fechaConsultasController.sink.add(fecha);
  }
   
- 
-//  void setPartidos(List<LigaModel> ligas){
-//     _partidosController.sink.add(ligas);
-//  }
-  
-
-
-
-
-
-
-   dispose() {
+ dispose() {
     _ligasController?.close();
     _fechaConsultasController?.close();
   }

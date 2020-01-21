@@ -2,12 +2,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:resultados_futbol/src/bloc/ligas_bloc.dart';
+import 'package:resultados_futbol/src/bloc/partidos_bloc.dart';
 
 
 
 class Provider extends InheritedWidget {
 
   final _ligasBloc      = new LigasBloc();
+  final _partidosBloc      = new PartidosBloc();
+
 
 
   static Provider _instancia;
@@ -39,6 +42,9 @@ class Provider extends InheritedWidget {
     return ( context.dependOnInheritedWidgetOfExactType<Provider>())._ligasBloc;
   }
 
+ static PartidosBloc partidosBloc ( BuildContext context ) {
+    return ( context.dependOnInheritedWidgetOfExactType<Provider>())._partidosBloc;
+  }
 
 
 }

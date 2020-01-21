@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:resultados_futbol/src/models/liga_model.dart';
 import 'package:resultados_futbol/src/models/partido_model.dart';
+import 'package:resultados_futbol/src/widgets/load_image.dart';
  
 
 
@@ -23,60 +24,31 @@ class Partidos extends StatelessWidget {
   Widget build(BuildContext context) {
 
  
-    
-    return  SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15),
-        child: _mostrarLigas(context)
-        // child: Text('partiods...'),
-        ),
+    return ListView.builder(
+
+        itemCount: ligas.length,
+        itemBuilder: (BuildContext context, int i){
+          return Container(
+
+           padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+
+            child: Column(
+              children: <Widget>[
+                
+                _liga(context,ligas[i]),
+                SizedBox(height: 20)
+
+              ],
+            ),
+          );
+        }
     );
+    
+    
   }
+ 
 
-Widget _mostrarLigas(BuildContext context){
-
-
-// return Text('kkkk ${ligas[0].partidos.length}');
-
-return Column(
-  children: _ligas(context),
-);
-
-  // return ListView.builder(
-
-  //   itemBuilder: ( BuildContext context,int i){
-
-  //       return Column(
-  //         children: <Widget>[
-  //           Text('partido')
-  //           //  _liga(context,ligas[i]),
-  //           //  SizedBox(height: 20)
-  //         ],
-  //       );
-
-  //   },
-
-  //   itemCount: ligas.length,
-
-  // );
-}
-
- List<Widget> _ligas(BuildContext context){
-
-    List<Widget> ligasWidget = new List();
-
-    ligas.forEach((liga){
-
-        ligasWidget.add(
-          _liga(context,liga)
-        );
-       ligasWidget.add(
-         SizedBox(height: 20)
-        );
-
-    });
-  return ligasWidget;
- }
+  
 
   Widget _liga(BuildContext context, LigaModel liga)
   {
@@ -89,11 +61,11 @@ return Column(
           children: <Widget>[
           Row(
             children: <Widget>[
-              //  FadeInImage(
-              //         image: NetworkImage(liga.getEscudo()),
-              //         placeholder:AssetImage('assets/loader.gif') ,
-              //         height: 30,
-              // ),
+               LoadImage(
+                      url: liga.getEscudo(),
+                      height: 30,
+                      width: 30,
+              ),
               SizedBox(width: 10),
               Text('${ liga.country }:',style: Theme.of(context).textTheme.subtitle),
               SizedBox(width: 10),
@@ -103,7 +75,7 @@ return Column(
           ),
 
           SizedBox(height: 15),
-            _containerPartidos(liga.partidos,size)
+            _containerPartidos(liga.partidos,size,context)
           ],
         )
           
@@ -111,7 +83,7 @@ return Column(
               
     );
   }
-  Widget _containerPartidos(List<PartidoModel> partidos,Size size)
+  Widget _containerPartidos(List<PartidoModel> partidos,Size size,BuildContext context)
   {
     return  Container(
       width: double.infinity,
@@ -129,25 +101,25 @@ return Column(
               ]
       ),
         child:Column(
-          children:_partidos(partidos,size)
+          children:_partidos(partidos,size,context)
         )
       );
   }
    
 
-  List<Widget> _partidos(List<PartidoModel> partidos,Size size)
+  List<Widget> _partidos(List<PartidoModel> partidos,Size size,BuildContext context)
   {
     List <Widget> _partidosWidgets= new List();
 
     partidos.forEach((item){
 
-      _partidosWidgets.add(_partido(item,size));
+      _partidosWidgets.add(_partido(item,size ,context));
     });
 
   
     return _partidosWidgets;
   }
-  Widget _partido(PartidoModel partido,Size size)
+  Widget _partido(PartidoModel partido,Size size,BuildContext context)
   {
     
      Widget marker=Text('-');
@@ -170,16 +142,17 @@ return Column(
 
   
        return InkWell(
-          onTap: (){print('tab on ${partido.fixtureId}');},
+          onTap: (){Navigator.pushNamed(context, 'partidos/detalles',arguments: partido);},
           child: Container(           
            padding: EdgeInsets.symmetric(vertical: 8),
            child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
 
                 Flexible(
             
                   child: Container(
-                    width: size.width*0.40,
+                    width: size.width*0.35,
                     child: Text(
                       partido.homeTeam.teamName,
                       textAlign: TextAlign.left,
@@ -190,24 +163,25 @@ return Column(
                 ),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // FadeInImage(
-                    //   image: NetworkImage(partido.homeTeam.getEscudo()),
-                    //   placeholder:AssetImage('assets/loader.gif') ,
-                    //   height: 30,
-                    // ),
-                    marker,
-                    // FadeInImage(
-                    //   image: NetworkImage(partido.awayTeam.getEscudo()),
-                    //   placeholder:AssetImage('assets/loader.gif') ,
-                    //   height: 30,
-                    // ),
+                    LoadImage(
+                      url:  partido.homeTeam.getEscudo(),
+                      height: 30,
+                      width: 30,
+                    ),
+                    marker,               
+                     LoadImage(
+                      url:  partido.awayTeam.getEscudo(),
+                      height: 30,
+                      width: 30,
+                    ),
                   ]
                   ),
                 
                  Flexible(
                   child: Container(
-                  width: size.width*0.40,
+                  width: size.width*0.35,
 
                      child: Text(                
                       partido.awayTeam.teamName,

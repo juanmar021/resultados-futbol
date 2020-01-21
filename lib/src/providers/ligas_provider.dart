@@ -16,7 +16,7 @@ class LigasProvider{
 
     Future<List<LigaModel>> getLigas(String fecha) async {
 
-  
+ 
 
     final response = await _helper.get('/v2/fixtures/date/$fecha?timezone=America/Bogota');
 

@@ -2,6 +2,7 @@
 // import 'package:intl/intl.dart';
 
  
+import 'package:intl/intl.dart';
 import 'package:resultados_futbol/src/models/liga_model.dart';
 import 'package:resultados_futbol/src/models/partido_model.dart';
 
@@ -88,5 +89,10 @@ static  List<LigaModel> fixtureOrderByLeague(List<PartidoModel> partidos)
 //   // String formatted = DateFormat('Hm').format(d);
 //   // print(formatted); // something like 2013-04-20
 //   }
+
+  static String formatDate (String date){
+
+    return DateFormat("dd/MM/yyyy").format(DateTime.parse(date));
+  }
  
 }

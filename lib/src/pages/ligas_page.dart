@@ -35,7 +35,7 @@ class LigasPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
 
         onPressed: (){},
-        child: Icon(Icons.live_tv),
+        child: Icon(Icons.wifi_tethering),
 
       ),
       bottomNavigationBar: NavBarBottom()
@@ -47,12 +47,12 @@ class LigasPage extends StatelessWidget {
 
   Widget _cargarLigas(LigasBloc ligasBloc){
     
-    // OPTENEMOS LA FECHA ACTUAL
+
  
       return StreamBuilder(
       stream: ligasBloc.ligasStream,
       builder: (BuildContext context, AsyncSnapshot<ApiResponse<List<LigaModel>>> snapshot) {
-        
+        if(snapshot.hasData){
         switch (snapshot.data.status) {
           
                 case Status.LOADING:
@@ -67,11 +67,9 @@ class LigasPage extends StatelessWidget {
                     reintentarAction: ligasBloc.cargarLigas,
                     mensaje:snapshot.data.message
                     );
-                  // return Error(
-                  //   errorMessage: snapshot.data.message,
-                  //   onRetryPressed: () => ligasBloc.fetchMovieList(),
-                  // );
+               
                   break;
+        }
         }
 
         return Container();
